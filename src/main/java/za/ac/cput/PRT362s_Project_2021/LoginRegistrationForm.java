@@ -38,6 +38,7 @@ public class LoginRegistrationForm extends JFrame{
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 textFieldFirstName.setText("");
                 textFieldLastName.setText("");
                 textFieldUsername.setText("");
@@ -49,6 +50,7 @@ public class LoginRegistrationForm extends JFrame{
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 System.exit(0);
             }
         });
@@ -68,19 +70,33 @@ public class LoginRegistrationForm extends JFrame{
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/registration?useSSL=false","root",null);
 
-                    String sql = "INSERT INTO user_account values ('"+firstName+"','"+lastName+"','"+username+"','"+password+"','"+confirmedPassword+"')";
 
-                    Statement statement = connect.createStatement();
-                    statement.executeUpdate(sql);
+                    if(firstName.equals("") || lastName.equals("") || username.equals("") || password.equals("") || confirmedPassword.equals("")){
 
-                    JOptionPane.showMessageDialog(null,"Welcome "+firstName+" your account was successful created!","Thank You!",JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Invalid, Please make sure all fields are completed!", "Oops!", JOptionPane.ERROR_MESSAGE);
 
-                    connect.close();
+                        textFieldFirstName.setText("");
+                        textFieldLastName.setText("");
+                        textFieldUsername.setText("");
+                        passwordFieldPassword.setText("");
+                        passwordFieldConfirmPassword.setText("");
 
-                    Login login = new Login();
-                    login.show();
-                    dispose();
+                    }
+                    else{
 
+                        String sql = "INSERT INTO user_account values ('"+firstName+"','"+lastName+"','"+username+"','"+password+"','"+confirmedPassword+"')";
+
+                        Statement statement = connect.createStatement();
+                        statement.executeUpdate(sql);
+
+                        JOptionPane.showMessageDialog(null, "Welcome, " + firstName + " your account was successful created!", "Thank You!", JOptionPane.INFORMATION_MESSAGE);
+
+                        connect.close();
+
+                        Login login = new Login();
+                        login.show();
+                        dispose();
+                    }
                 }
                 catch(Exception ex){
                     System.out.println(ex.getMessage());
