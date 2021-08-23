@@ -52,13 +52,15 @@ public class Login extends JFrame {
                     ResultSet result = statement.executeQuery(sql);
 
                     if(result.next()){
+
                         Dashboard dashboard = new Dashboard();
                         dashboard.show();
                         dispose();
                     }
 
                     else{
-                      JOptionPane.showMessageDialog(null,"Username or Password is Invalid !!!","Oops!",JOptionPane.ERROR_MESSAGE);
+
+                      JOptionPane.showMessageDialog(null,"Username or Password is Invalid!","Oops!",JOptionPane.ERROR_MESSAGE);
                         textFieldUsername.setText("");
                         passwordFieldPassword.setText("");
                     }
@@ -76,6 +78,7 @@ public class Login extends JFrame {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 textFieldUsername.setText("");
                 passwordFieldPassword.setText("");
             }
@@ -84,6 +87,7 @@ public class Login extends JFrame {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 System.exit(0);
             }
         });
@@ -91,6 +95,7 @@ public class Login extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 LoginRegistrationForm loginRegistrationForm = new LoginRegistrationForm();
                 loginRegistrationForm.show();
                 dispose();
